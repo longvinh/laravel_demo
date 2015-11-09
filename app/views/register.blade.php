@@ -18,7 +18,11 @@
         rules:{
             username:{
                 required:true,
-                minlength:3
+                minlength:3,
+                remote:{
+                    url:"{{Asset('check\check-username')}}",
+                    type:"POST"
+                }
             },
             password:{
                 required:true,
@@ -31,12 +35,17 @@
             email:{
                 required:true,
                 email:true,
+                remote:{
+                    url:"{{Asset('check\check-email')}}",
+                    type:"POST"
+                }
             }
         },
         messages:{
             username:{
                 required:"Chưa nhập username",
-                minlength:"username từ 3 ký tự trở lên"
+                minlength:"username từ 3 ký tự trở lên",
+                remote:"username đã tồn tại"
             },
             password:{
                 required:"Chưa nhập password",
@@ -48,7 +57,8 @@
             },
             email:{
                 required:"Chưa nhập email",
-                email:"Không đúng định dạng email"
+                email:"Không đúng định dạng email",
+                remote:"email đã tồn tại"
             }
         }
     })

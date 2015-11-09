@@ -16,6 +16,19 @@ Route::get('/hello', function()
 	return View::make('hello');
 });
 
+Route::group(array("prefix"=>"check"),function(){
+   Route::post("check-username",function(){
+       if(User::check_username(Input::get("username")))
+           return "true";
+       else return "false";
+   }) ;
+   Route::post("check-email",function(){
+       if(User::check_email(Input::get("username")))
+           return "true";
+       else return "false";
+   }) ;
+});
+
 Route::get('register', function()
 {
 	return View::make('register');
@@ -45,10 +58,8 @@ Route::get('login', function()
 });
 
 Route::post('login',function(){
-    if(User::check_login(Input::get("user_input"),Input::get("password"))){
+    if(User::check_login(Input::get("user_input"),Input::get("password")))
             echo "Đăng nhập thành công";
-    }
-    else {
+    else
         echo "Đăng nhập không thành công";
-    }
 });
